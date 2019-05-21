@@ -67,6 +67,10 @@ private object CommonArgParsers {
     longOption("debugMode", "DebugMode") ~ ws ~/
     qstring.opaque("debug mode name, any string") ~ ws
 
+  def synthEffort : Parser[(String, String)] =
+    longOption("synthEffort", "SynthEffort") ~ ws ~/
+    string.opaque("Synthesis effort") ~ ws
+
   def implementation: Parser[(String, String)] =
     longOption("implementation", "Implementation") ~
     ws ~/

@@ -57,6 +57,11 @@ class CommonArgParsersSpec extends FlatSpec with Matchers with Checkers {
       checkParsed( P( debugMode ~ End ).parse(d) )
     })
 
+  "All valid synthEffort parameters" should "be parsed correctly by synthEffort" in
+    check(forAllNoShrink(effortModeGen) { e =>
+      checkParsed( P(synthEffort ~ End).parse(e))
+    })
+
   "All valid implementation parameters" should "be parsed correctly by implementation" in
     check(forAllNoShrink(implementationGen) { i =>
       checkParsed( P( implementation ~ End ).parse(i) )
@@ -101,6 +106,11 @@ private object CommonArgParsersSpec {
   val debugModeGen: Gen[String] = join(Seq(
     genLongOption("debugMode"),
     qstringGen
+  ))
+
+  val effortModeGen : Gen[String] = join(Seq(
+    genLongOption("synthEffort"),
+    Gen.oneOf("fastest", "fast", "normal", "optimal", "optimal", "aggressive_performance", "aggressive_area")
   ))
 
   val implementationGen: Gen[String] = join(Seq(
